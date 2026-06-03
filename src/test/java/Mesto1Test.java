@@ -14,7 +14,6 @@ public class Mesto1Test {
     @BeforeEach
     public void setUp() {
         RestAssured.baseURI = "https://qa-mesto.praktikum-services.ru";
-        RestAssured.useRelaxedHTTPSValidation();
     }
 
     @Test
