@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
 
 import static io.restassured.RestAssured.given;
 
@@ -14,6 +16,14 @@ public class Mesto1Test {
     @BeforeEach
     public void setUp() {
         RestAssured.baseURI = "https://qa-mesto.praktikum-services.ru";
+
+        // Увеличиваем таймауты до 30 секунд
+        RestAssured.config = RestAssured.config()
+                .httpClient(HttpClientConfig.httpClientConfig()
+                        .setParam("http.socket.timeout", 30000)   // таймаут чтения данных (30 сек)
+                        .setParam("http.connection.timeout", 30000) // таймаут соединения (30 сек)
+                        .setParam("http.connection.request.timeout", 30000) // таймаут из пула соединений
+                );
     }
 
     @Test
