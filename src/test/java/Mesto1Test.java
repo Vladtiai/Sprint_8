@@ -15,7 +15,13 @@ import static io.restassured.RestAssured.given;
 public class Mesto1Test {
 
     static {
+        // 1. Глобальное отключение SSL через HttpsURLConnection
         disableSSLCertificateVerification();
+
+        // 2. Системные свойства для принудительного использования протоколов TLS
+        System.setProperty("https.protocols", "TLSv1.2,TLSv1.3");
+        System.setProperty("jdk.tls.client.protocols", "TLSv1.2,TLSv1.3");
+        System.setProperty("com.sun.net.ssl.checkRevocation", "false");
     }
 
     private static void disableSSLCertificateVerification() {
@@ -42,13 +48,16 @@ public class Mesto1Test {
     public void setUp() {
         RestAssured.baseURI = "https://qa-mesto.praktikum-services.ru";
 
-        // Увеличиваем таймауты до 30 секунд
+        // Явное отключение проверки SSL для RestAssured (работает даже при другом HTTP-клиенте)
+        RestAssured.useRelaxedHTTPSValidation();
+
+        // Конфигурация таймаутов
         RestAssured.config = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
-                        .setParam("http.socket.timeout", 30000)   // таймаут чтения данных (30 сек)
-                        .setParam("http.connection.timeout", 30000) // таймаут соединения (30 сек)
-                        .setParam("http.connection.request.timeout", 30000) // таймаут из пула соединений
-                );
+                        .setParam("http.socket.timeout", 30000)
+                        .setParam("http.connection.timeout", 30000)
+                        .setParam("http.connection.request.timeout", 30000))
+                .sslConfig(new SSLConfig().relaxedHTTPSValidation()); // дублируем для надёжности
     }
 
     @Test
