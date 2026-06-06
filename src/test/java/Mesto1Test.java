@@ -42,7 +42,7 @@ public class Mesto1Test {
         }
     }
 
-    String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OWU2MjhlYWE1YzcxMjAwM2QwZWEyZmQiLCJpYXQiOjE3ODA3NDE1MDUsImV4cCI6MTc4MTM0NjMwNX0.oicDfivsM8V8DUxBysMDq92MuIoNbyRfSP54IMps2Ik";
+    String bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OWU2MjhlYWE1YzcxMjAwM2QwZWEyZmQiLCJpYXQiOjE3ODA3NDUwMjksImV4cCI6MTc4MTM0OTgyOX0.59r3mOZtVf2ws7DwLnOHam9yp4fu7W_yAv9wElGmROQ";
 
     @BeforeEach
     public void setUp() {
